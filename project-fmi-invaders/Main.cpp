@@ -10,12 +10,8 @@
 
 int main() 
 {
-	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
 	WindowHandler::i()->initWindow();
-
 	WindowHandler::i()->printGameLogo();
-
 	WindowHandler::i()->initMainMenu();
 	GameEngine::i()->initMainMenuHandles();
 
