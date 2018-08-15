@@ -1,3 +1,11 @@
+/**
+	FMI OOP 2018 Final Project
+	Explosion.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
 #include "Explosion.h"
 #include "GameEngine.h"
 

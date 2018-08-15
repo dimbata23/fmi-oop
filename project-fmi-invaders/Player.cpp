@@ -1,4 +1,12 @@
-﻿#include "Player.h"
+﻿/**
+	FMI OOP 2018 Final Project
+	Player.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
+#include "Player.h"
 #include "GameEngine.h"
 #include "Bullet.h"
 

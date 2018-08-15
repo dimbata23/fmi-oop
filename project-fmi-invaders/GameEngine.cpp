@@ -1,8 +1,14 @@
-﻿#include <iostream>
+﻿/**
+	FMI OOP 2018 Final Project
+	GameEngine.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
+#include <iostream>
 #include <ctime>
 #include <fstream>
-//#include <windows.h>
-//#include <mmsystem.h>
 #include "GameEngine.h"
 #include "Player.h"
 #include "Bullet.h"

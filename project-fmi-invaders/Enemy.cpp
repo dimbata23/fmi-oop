@@ -1,3 +1,11 @@
+/**
+	FMI OOP 2018 Final Project
+	Enemy.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
 #include "Enemy.h"
 #include "GameEngine.h"
 #include "Explosion.h"

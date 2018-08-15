@@ -1,4 +1,12 @@
-﻿#include <iostream>
+﻿/**
+	FMI OOP 2018 Final Project
+	WindowsHandler.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
+#include <iostream>
 #include <io.h>
 #include <fcntl.h>
 #include "WindowHandler.h"

@@ -1,3 +1,11 @@
+/**
+	FMI OOP 2018 Final Project
+	EnemyArrow.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
 #include "EnemyArrow.h"
 
 const Color DEFAULT_ARROW_COLOR = C_DK_GREEN;

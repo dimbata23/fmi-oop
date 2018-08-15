@@ -1,3 +1,11 @@
+/**
+	FMI OOP 2018 Final Project
+	Object.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
 #include "Object.h"
 #include "WindowHandler.h"
 

@@ -1,3 +1,11 @@
+/**
+	FMI OOP 2018 Final Project
+	EnemyBird.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
 #include "EnemyBird.h"
 
 const Color DEFAULT_BIRD_COLOR = C_DK_YELLOW;

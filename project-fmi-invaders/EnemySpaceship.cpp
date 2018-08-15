@@ -1,3 +1,11 @@
+/**
+	FMI OOP 2018 Final Project
+	EnemySpaceship.cpp
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
 #include "EnemySpaceship.h"
 
 const Color DEFAULT_SPACESHIP_COLOR = C_BLUE;
