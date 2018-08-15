@@ -23,8 +23,8 @@ public:
 	void virtual serialize(std::ofstream& out) const;
 
 private:
-	ExplosionSize size;
-	unsigned lifetime;
+	ExplosionSize size;		// size of the explosion
+	unsigned lifetime;		// amount of ticks the object has existed
 };
 
 #endif // !__EXPLOSION_HEADER_INCLUDED__

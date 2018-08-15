@@ -6,6 +6,8 @@
 	@version 1.4 03/07/18
 */
 
+
+
 #include "EnemySpaceship.h"
 
 const Color DEFAULT_SPACESHIP_COLOR = C_BLUE;
@@ -15,6 +17,7 @@ const char* SPACESHIP_MODEL[] =
 	"<~~",
 	"<~ "
 };
+
 
 EnemySpaceship::EnemySpaceship(unsigned short x, unsigned short y) : 
 	Enemy(x, y, ENEMY_SPACESHIP)
@@ -29,11 +32,13 @@ EnemySpaceship::EnemySpaceship(unsigned short x, unsigned short y) :
 	color = DEFAULT_SPACESHIP_COLOR;
 }
 
+
 EnemySpaceship::EnemySpaceship(std::ifstream& in) :
 	Enemy(in, ENEMY_SPACESHIP)
 {
 	model = SPACESHIP_MODEL;
 	color = DEFAULT_SPACESHIP_COLOR;
 }
+
 
 EnemySpaceship::~EnemySpaceship() {}

@@ -6,11 +6,14 @@
 	@version 1.4 03/07/18
 */
 
+
+
 #include "Object.h"
 #include "WindowHandler.h"
 
 
 static unsigned currId = 1;		// starting from 1 so we have an invalid id of 0
+
 
 Object::Object() : 
 	model(nullptr), 
@@ -23,6 +26,7 @@ Object::Object() :
 	subType(-1),
 	color(C_WHITE)
 {}
+
 
 Object::Object(unsigned short x, unsigned short y, 
 			   unsigned short width, unsigned short height, 
@@ -38,6 +42,7 @@ Object::Object(unsigned short x, unsigned short y,
 	color(C_WHITE)
 {}
 
+
 Object::Object(std::ifstream& in, ObjectType type, int subType) :
 	type(type),
 	model(nullptr),
@@ -52,12 +57,15 @@ Object::Object(std::ifstream& in, ObjectType type, int subType) :
 	in.read((char*)&color, sizeof(color));
 }
 
-Object::~Object() {}
 
+Object::~Object() {}
 void Object::update() {}
+unsigned char Object::receiveDamage(unsigned char damage) { return damage; }
+
 
 void Object::drawSelf() const 
 {
+	// Go through the model and add the characters to the gameWindow in their respective color
 	for (unsigned char i = 0; i < height; ++i) {
 		for (unsigned char j = 0; j < width; ++j) {
 			if (model[i][j] != ' ') {
@@ -68,22 +76,19 @@ void Object::drawSelf() const
 	}
 }
 
+
 unsigned Object::getWidth() const { return width; }
-
 unsigned Object::getHeight() const { return height; }
-
 unsigned Object::getId() const { return id; }
-
 unsigned Object::getX() const { return x; }
-
 unsigned Object::getY() const { return y; }
-
-unsigned char Object::receiveDamage(unsigned char damage) { return damage; }
-
 ObjectType Object::getObjectType() const { return type; }
+unsigned Object::getNextId() const { return currId++; }
+
 
 void Object::serialize(std::ofstream& out) const 
 {
+	// Standard serialization
 	out.write((const char*)&type, sizeof(type));
 	if (subType != -1)
 		out.write((const char*)&subType, sizeof(subType));
@@ -94,4 +99,3 @@ void Object::serialize(std::ofstream& out) const
 	out.write((const char*)&color, sizeof(color));
 }
 
-unsigned Object::getNextId() const { return currId++; }

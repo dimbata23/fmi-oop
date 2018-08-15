@@ -6,10 +6,13 @@
 	@version 1.4 03/07/18
 */
 
+
+
 #include "Explosion.h"
 #include "GameEngine.h"
 
 const Color DEFAULT_COLOR = C_LT_GRAY;
+
 
 Explosion::Explosion(unsigned short x, unsigned short y) :
 	Object(x, y, EXPLOSION_NORMAL, EXPLOSION_NORMAL, EXPLOSION),
@@ -46,6 +49,7 @@ void Explosion::update()
 
 void Explosion::drawSelf() const 
 {
+	// Pathetic way of animating the explosion
 	for (unsigned i = 0; i < lifetime; ++i) {
 		WindowHandler::i()->setColorAt(x - i, y, DEFAULT_COLOR);
 		WindowHandler::i()->setColorAt(x + i, y, DEFAULT_COLOR);

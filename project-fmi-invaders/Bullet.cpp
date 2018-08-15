@@ -6,6 +6,8 @@
 	@version 1.4 03/07/18
 */
 
+
+
 #include "Bullet.h"
 #include "GameEngine.h"
 #include "Explosion.h"
@@ -26,11 +28,12 @@ Bullet::Bullet(unsigned short x, unsigned short y,
 	damage(DEFAULT_DAMAGE)
 {
 	model = BULLET_MODEL;
-	if (direction == -1)
-		color = C_RED;
+	if (direction == -1)	// if it's an enemy bullet (traveling left)
+		color = C_RED;		// it's color is set to red
 	else
-		color = C_LT_GRAY;
+		color = C_LT_GRAY;	// else it's light gray
 }
+
 
 Bullet::Bullet(unsigned short x, unsigned short y,
 	short direction, unsigned shooterId,
@@ -42,11 +45,12 @@ Bullet::Bullet(unsigned short x, unsigned short y,
 	damage(damage)
 {
 	model = BULLET_MODEL;
-	if (direction == -1)
-		color = C_RED;
+	if (direction == -1)	// if it's an enemy bullet (traveling left)
+		color = C_RED;		// it's color is set to red
 	else
-		color = C_LT_GRAY;
+		color = C_LT_GRAY;	// else it's light gray
 }
+
 
 Bullet::Bullet(std::ifstream& in) :
 	Object(in, BULLET)
@@ -58,22 +62,35 @@ Bullet::Bullet(std::ifstream& in) :
 	model = BULLET_MODEL;
 }
 
+
 Bullet::~Bullet() {}
+
 
 void Bullet::update()
 {
+	// Itterates through the places between where the bullet is now and where it will be in the next frame
 	for (size_t i = 1; i <= speed; i++) {
+		// If the bullet is inside the gameWindow
 		if ((x + (direction * i)) >= 0 && (x + (direction * i)) < WindowHandler::i()->getGameWindowWidth()) {
+			// If there is something in the place
 			if (WindowHandler::i()->lookAt(x + direction * i, y) != ' ') {
+				// Checks what's in that place
 				Object* other = GameEngine::i()->getObjectAt(x + direction * i, y);
 				if (other) {
+					// If it's and enemy and the bullet was shot from the player
+					// Or the other way around
 					if ((other->getObjectType() == ENEMY && direction == 1) ||
 						(other->getObjectType() == PLAYER && direction == -1))
 					{
+						// That object gets damaged
 						other->receiveDamage(damage);
+						// A small explosion is created on impact
 						GameEngine::i()->instanciateObject(new Explosion(x + width / 2 + direction * i, y + height / 2, EXPLOSION_TINY));
+						// The bullet gets destroyed
 						GameEngine::i()->destroyObject(id);
+						// A sound is being played
 						PlaySound(TEXT("Sounds/bullet_hit.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						// Terminate the update function
 						return;
 					}
 				}
@@ -81,7 +98,12 @@ void Bullet::update()
 		}
 	}
 
+	// Otherwise
+
+	// Move the bullet
 	x += direction * speed;
+
+	// And destroy it if it ends up outside the gameWindow
 	if (x < 0 || x >= WindowHandler::i()->getGameWindowWidth() || y < 0 || y >= WindowHandler::i()->getGameWindowHeight()) {
 		GameEngine::i()->destroyObject(id);
 		return;
@@ -96,11 +118,3 @@ void Bullet::serialize(std::ofstream& out) const
 	out.write((const char*)&damage, sizeof(damage));
 	out.write((const char*)&direction, sizeof(direction));
 }
-
-//char Bullet::getDirection() const {
-//	return direction;
-//}
-//
-//unsigned char Bullet::getDamage() const {
-//	return damage;
-//}

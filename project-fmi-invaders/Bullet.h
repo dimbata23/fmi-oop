@@ -12,16 +12,15 @@ public:
 		short direction, unsigned shooterId, unsigned short damage);
 	Bullet(std::ifstream&);
 	~Bullet();
-public:
+
 	virtual void update();
 	virtual void serialize(std::ofstream& out) const;
-	//char getDirection() const;
-	//unsigned char getDamage() const;
+
 protected:
 	unsigned shooterId;
 	unsigned char speed;
 	unsigned char damage;
-	char direction;
+	char direction;			// either 1 or -1 (1 == right, left == -1)
 };
 
 

@@ -6,6 +6,8 @@
 	@version 1.4 03/07/18
 */
 
+
+
 #include <iostream>
 #include <io.h>
 #include <fcntl.h>
@@ -85,18 +87,22 @@ void WindowHandler::initWindow()
 	
 	// Setting the console buffer size and draw gameWindow size
 	bufferSize = GetLargestConsoleWindowSize(console);
+
 	// Setting size to minimal so we can resize the buffer smaller than the gameWindow
+	// (Otherwise it doesn't let us)
 	SetConsoleDisplayMode(console, CONSOLE_WINDOWED_MODE, 0);
 	SMALL_RECT const minimal_window = { 0, 0, 1, 1 };
 	SetConsoleWindowInfo(console, TRUE, &minimal_window);
 	screenSize = bufferSize;
 	bufferSize.X -= 2;	// tiny fix to account for the scrollbar on the right
+
 	// Setting the desired console buffer size
 	int Status = SetConsoleScreenBufferSize(console, bufferSize);
 	SMALL_RECT const maximal_window = { 0, 0, bufferSize.X, bufferSize.Y };
 	SetConsoleWindowInfo(console, TRUE, &maximal_window);
 	SetConsoleDisplayMode(console, CONSOLE_FULLSCREEN_MODE, 0);
 	
+	// MAGIC NUMBERSSSS
 	bufferSize.X -= 6;	//	Tiny adjustments so we dont write outside
 	bufferSize.Y -= 10;	//	of the console buffer and cause scrollbars
 	
@@ -114,6 +120,9 @@ void WindowHandler::printGameLogo() const
 	const wchar_t** logo = GameEngine::gameLogo;
 	unsigned char logoLength = wcslen(*logo);
 	unsigned char leftOffset = screenSize.X / 2 - logoLength / 2 + 1;
+
+	// Setting the color
+	// MAGIC COLOR (NUMBERSSS)
 	setColor(C_DK_RED);
 	for (unsigned char i = 2; *logo; ++i) {
 		SetConsoleCursorPosition(console, {leftOffset, i});
@@ -126,11 +135,15 @@ void WindowHandler::printGameLogo() const
 
 void WindowHandler::initMainMenu() const 
 {
+	// (Ignore all the magic numbers)
+
+	// Writing out the Main menu options
 	unsigned char currY = screenSize.Y / 2;
 	const wchar_t selection1[] = L"Start a new game";
 	SetConsoleCursorPosition(console, { screenSize.X / 5 * 2 - (short)wcslen(selection1) / 2, currY });
 	std::wcout << selection1;
 	currY += 2;
+	// If there is a save file add a Load option
 	if (GameEngine::i()->saveFileExists()) {
 		const wchar_t selection2[] = L"Load last saved game";
 		SetConsoleCursorPosition(console, { screenSize.X / 5 * 2 - (short)wcslen(selection2) / 2, currY });
@@ -140,7 +153,9 @@ void WindowHandler::initMainMenu() const
 	const wchar_t selection3[] = L"Quit game";
 	SetConsoleCursorPosition(console, { screenSize.X / 5 * 2 - (short)wcslen(selection3) / 2, currY });
 	std::wcout << selection3;
+	
 
+	// If there isn't a save file (we assume it's a new player so we print out the Controls)
 	if (!GameEngine::i()->saveFileExists()) {
 		wchar_t tips1[] = L" - CONTROLS - ";
 		SetConsoleCursorPosition(console, { screenSize.X / 5 * 4 - (short)wcslen(tips1) / 2, screenSize.Y / 2 - 1 });
@@ -163,16 +178,19 @@ void WindowHandler::initMainMenu() const
 
 void WindowHandler::drawMainMenuSelector(unsigned char sel) const 
 {
+	// Clear out all the spaces where the previous selector could have been
 	for (unsigned char i = 0; i < 6; i+=2) {
 		SetConsoleCursorPosition(console, { screenSize.X / 5, screenSize.Y / 2 + i });
-		std::wcout << ' ';
+		std::wcout << L' ';
 	}
 
+	// Setting the place where the selector will be drawn
 	if (sel != 0 && !GameEngine::i()->saveFileExists())
 		SetConsoleCursorPosition(console, { screenSize.X / 5, screenSize.Y / 2 + sel * 2 - 2 });
 	else 
 		SetConsoleCursorPosition(console, { screenSize.X / 5, screenSize.Y / 2 + sel * 2 });
 
+	// Drawing the selector
 	std::wcout << PAUSE_MENU_SELECTOR;
 }
 
@@ -181,13 +199,11 @@ void WindowHandler::clearScreen() const
 {
 	for (unsigned char i = 0; i < screenSize.Y; ++i)
 		for (unsigned char j = 0; j < screenSize.X; ++j)
-			std::wcout << ' ';
+			std::wcout << L' ';
 }
 
 
 short WindowHandler::getGameWindowWidth() const { return gameWindow.width; }
-
-
 short WindowHandler::getGameWindowHeight() const { return gameWindow.height; }
 
 
@@ -204,26 +220,40 @@ void WindowHandler::clearGameWindow()
 
 void WindowHandler::drawGameWindow() const
 {
+	// Starting from (0, 0)
 	SetConsoleCursorPosition(console, { 0, 0 });
 	COORD cursor;
 	cursor.X = 0;
 	cursor.Y = 0;
+	
 	for (short i = 0; i < gameWindow.height; ++i) {
 		for (short j = 0; j < gameWindow.width; ++j) {
+			// Only print the character if it's different than the previous frame's character
+			// (Greatly increases performance)
 			if (gameWindow.characters[i][j] != gameWindow.oldCharacters[i][j] ||
 				gameWindow.colors[i][j] != gameWindow.oldColors[i][j])
 			{
+				// Copy the character to the previous screen
 				gameWindow.colors[i][j] == gameWindow.oldColors[i][j];
 				gameWindow.oldCharacters[i][j] = gameWindow.characters[i][j];
+
+				// Calculating the console cursor position
 				cursor.X = j + gameWindow.x;
 				cursor.Y = i + gameWindow.y;
+				
+				// Setting the color
 				setColor(gameWindow.colors[i][j]);
+
+				// Setting the console cursor position
 				SetConsoleCursorPosition(console, cursor);
+
+				// Printing the character
 				std::wcout << gameWindow.characters[i][j];
 			}
 		}
 	}
 	setColor(C_WHITE);
+
 	// Setting the cursor out of the gameWindow just incase something happens
 	SetConsoleCursorPosition(console, { gameWindow.x - 1, (short)(gameWindow.y + gameWindow.height + 1) });
 }
@@ -305,22 +335,31 @@ void WindowHandler::clearPauseMenu()
 void WindowHandler::drawPauseMenuSelector(unsigned short sel) const {
 	for (unsigned char i = pauseMenu.y + 3; i < pauseMenu.y + PAUSE_MENU_HEIGHT; i += 2) {
 		SetConsoleCursorPosition(console, { gameWindow.x + pauseMenu.x + 1, gameWindow.y + i });
-		std::wcout << ' ';
+		std::wcout << L' ';
 	}
 	SetConsoleCursorPosition(console, { gameWindow.x + pauseMenu.x + 1, gameWindow.y + pauseMenu.y + 3 + 2 * sel });
 	std::wcout << PAUSE_MENU_SELECTOR;
 }
 
 
-void WindowHandler::showPauseMenuMessage(const char* text) 
+void WindowHandler::showPauseMenuMessage(const char* text, unsigned time)
 {
+	// Clear out the place where the pause menu is
 	clearPauseMenu();
+
 	unsigned textLen = strlen(text);
 	addTextToWindow(text, pauseMenu.x + PAUSE_MENU_WIDTH / 2 - textLen / 2, pauseMenu.y + 1);
+
 	drawGameWindow();
 	drawMenuBorder();
-	Sleep(1500);
+	
+	// Dispay it for a certain amount of time
+	Sleep(time);
+
+	// Clear the place again
 	clearPauseMenu();
+
+	// And then redraw the pause menu
 	drawPauseMenu();
 	drawPauseMenuSelector(1);
 	drawGameWindow();
@@ -394,6 +433,7 @@ void WindowHandler::drawMenuBorder() const
 		SetConsoleCursorPosition(console, { gameWindow.x + i, gameWindow.y + pauseMenu.y + PAUSE_MENU_HEIGHT });
 		std::wcout << BORDER_CHAR;
 	}
+
 	for (unsigned char i = pauseMenu.y; i < pauseMenu.y + PAUSE_MENU_HEIGHT; ++i) {
 		SetConsoleCursorPosition(console, { gameWindow.x + pauseMenu.x - 1, gameWindow.y + i });
 		std::wcout << BORDER_CHAR;
@@ -507,8 +547,6 @@ void WindowHandler::drawGameWindowBorder() const
 }
 
 
-
-
 void WindowHandler::setFont(const wchar_t * fontName, short width, short height, unsigned fontWeight) 
 {
 	CONSOLE_FONT_INFOEX cfi;
@@ -517,8 +555,8 @@ void WindowHandler::setFont(const wchar_t * fontName, short width, short height,
 	cfi.dwFontSize.X = 16;
 	cfi.dwFontSize.Y = 16;
 	cfi.FontFamily = FF_DONTCARE;
-	cfi.FontWeight = FW_BOLD;
-	wcscpy(cfi.FaceName, L"Consolas");
+	cfi.FontWeight = fontWeight;
+	wcscpy(cfi.FaceName, fontName);
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 }
 

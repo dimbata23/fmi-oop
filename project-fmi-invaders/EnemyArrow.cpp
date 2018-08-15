@@ -6,6 +6,8 @@
 	@version 1.4 03/07/18
 */
 
+
+
 #include "EnemyArrow.h"
 
 const Color DEFAULT_ARROW_COLOR = C_DK_GREEN;
@@ -15,6 +17,7 @@ const char* ARROW_MODEL[] =
 	"<(-)-",
 	"    \\"
 };
+
 
 EnemyArrow::EnemyArrow(unsigned short x, unsigned short y) : 
 	Enemy(x, y, ENEMY_ARROW)
@@ -31,11 +34,13 @@ EnemyArrow::EnemyArrow(unsigned short x, unsigned short y) :
 	color = DEFAULT_ARROW_COLOR;
 }
 
+
 EnemyArrow::EnemyArrow(std::ifstream& in) :
 	Enemy(in, ENEMY_ARROW)
 {
 	model = ARROW_MODEL;
 	color = DEFAULT_ARROW_COLOR;
 }
+
 
 EnemyArrow::~EnemyArrow() {}

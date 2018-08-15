@@ -17,7 +17,9 @@ class Object
 {
 public:
 	Object();
-	Object(unsigned short x, unsigned short y, unsigned short width, unsigned short height, ObjectType type, int subType = -1);
+	Object(unsigned short x, unsigned short y, 
+		   unsigned short width, unsigned short height, 
+		   ObjectType type, int subType = -1);
 	Object(std::ifstream& in, ObjectType type, int subType = -1);
 	virtual ~Object();
 
@@ -25,16 +27,40 @@ public:
 		Code ran every frame
 	*/
 	virtual void update();
+
 	/**
 		Code for drawing the object
 	*/
 	virtual void drawSelf() const;
 
+	/**
+		Returns the width of the object
+	*/
 	virtual unsigned getWidth() const;
+
+	/**
+		Returns the height of the object
+	*/
 	virtual unsigned getHeight() const;
+
+	/**
+		Returns the id of the object
+	*/
 	unsigned getId() const;
+
+	/**
+		Returns the x position of the object
+	*/
 	unsigned getX() const;
+
+	/**
+		Returns the y position of the object
+	*/
 	unsigned getY() const;
+
+	/**
+		Returns the type of the object
+	*/
 	ObjectType getObjectType() const;
 
 	/**
@@ -61,15 +87,15 @@ private:
 
 
 protected:
-	const char** model;
-	unsigned id;
-	const ObjectType type;
-	const int subType;
-	Color color;
-	unsigned short x;
-	unsigned short y;
-	unsigned short width;
-	unsigned short height;
+	const char** model;		// Matrix model of the object
+	unsigned id;			// ID
+	const ObjectType type;	// Object's type
+	const int subType;		// Object's subtype
+	Color color;			// Color of the object
+	unsigned short x;		// Object's x position
+	unsigned short y;		// Object's y position
+	unsigned short width;	// Object's width
+	unsigned short height;	// Object's height
 };
 
 #endif // !__OBJECT_HEADER_INCLUDED__

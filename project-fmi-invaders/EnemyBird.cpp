@@ -6,6 +6,8 @@
 	@version 1.4 03/07/18
 */
 
+
+
 #include "EnemyBird.h"
 
 const Color DEFAULT_BIRD_COLOR = C_DK_YELLOW;
@@ -15,6 +17,7 @@ const char* BIRD_MODEL[] =
 	"<<<<",
 	" <  "
 };
+
 
 EnemyBird::EnemyBird(unsigned short x, unsigned short y) :
 	Enemy(x, y, ENEMY_BIRD)
@@ -28,11 +31,13 @@ EnemyBird::EnemyBird(unsigned short x, unsigned short y) :
 	color = DEFAULT_BIRD_COLOR;
 }
 
+
 EnemyBird::EnemyBird(std::ifstream& in) :
 	Enemy(in, ENEMY_BIRD)
 {
 	model = BIRD_MODEL;
 	color = DEFAULT_BIRD_COLOR;
 }
+
 
 EnemyBird::~EnemyBird() {}
