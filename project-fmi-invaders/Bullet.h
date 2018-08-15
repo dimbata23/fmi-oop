@@ -7,9 +7,9 @@ class Bullet : public Object
 {
 public:
 	Bullet(unsigned short x, unsigned short y,
-		short direction, unsigned shooterId);
+		char direction, unsigned shooterId);
 	Bullet(unsigned short x, unsigned short y,
-		short direction, unsigned shooterId, unsigned short damage);
+		char direction, unsigned shooterId, unsigned short damage);
 	Bullet(std::ifstream&);
 	~Bullet();
 
@@ -18,8 +18,8 @@ public:
 
 protected:
 	unsigned shooterId;
+	unsigned short damage;
 	unsigned char speed;
-	unsigned char damage;
 	char direction;			// either 1 or -1 (1 == right, left == -1)
 };
 

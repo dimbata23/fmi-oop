@@ -20,7 +20,7 @@ const unsigned short DEFAULT_BULLET_HEIGHT = 1;
 const char* BULLET_MODEL[] = { "-" };
 
 Bullet::Bullet(unsigned short x, unsigned short y,
-	short direction, unsigned shooterId) :
+	char direction, unsigned shooterId) :
 	Object(x, y, DEFAULT_BULLET_WIDTH, DEFAULT_BULLET_HEIGHT, BULLET),
 	direction(direction),
 	shooterId(shooterId),
@@ -36,7 +36,7 @@ Bullet::Bullet(unsigned short x, unsigned short y,
 
 
 Bullet::Bullet(unsigned short x, unsigned short y,
-	short direction, unsigned shooterId,
+	char direction, unsigned shooterId,
 	unsigned short damage) :
 	Object(x, y, DEFAULT_BULLET_WIDTH, DEFAULT_BULLET_HEIGHT, BULLET),
 	direction(direction),
@@ -69,7 +69,7 @@ Bullet::~Bullet() {}
 void Bullet::update()
 {
 	// Itterates through the places between where the bullet is now and where it will be in the next frame
-	for (size_t i = 1; i <= speed; i++) {
+	for (unsigned char i = 1; i <= speed; i++) {
 		// If the bullet is inside the gameWindow
 		if ((x + (direction * i)) >= 0 && (x + (direction * i)) < WindowHandler::i()->getGameWindowWidth()) {
 			// If there is something in the place
