@@ -1,3 +1,12 @@
+/**
+	FMI OOP 2018 Final Project
+
+	@author Alexander Dimitrov
+	@version 1.4 03/07/18
+*/
+
+
+
 #include <iostream>
 #include <chrono>
 #include <windows.h>
