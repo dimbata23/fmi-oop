@@ -56,6 +56,9 @@ int main()
 		GameEngine::i()->drawAll();
 
 		// Draw the player's score/lives/health
+		//    [this doesn't need to be drawn every frame]
+		//    [only after an updated of the status has been detected]
+		//    [.. this functionality hasn't been implemented]
 		WindowHandler::i()->drawStatus();
 
 		// Draw the frame

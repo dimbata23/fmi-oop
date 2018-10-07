@@ -221,7 +221,7 @@ void WindowHandler::clearGameWindow()
 void WindowHandler::drawGameWindow() const
 {
 	// Starting from (0, 0)
-	SetConsoleCursorPosition(console, { 0, 0 });
+	//SetConsoleCursorPosition(console, { 0, 0 });
 	COORD cursor;
 	cursor.X = 0;
 	cursor.Y = 0;
@@ -415,13 +415,7 @@ void WindowHandler::drawGUI() const
 
 void WindowHandler::setColor(int color) const
 {
-	WORD wColor;
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-	if (GetConsoleScreenBufferInfo(console, &csbi)) {
-		wColor = color;
-		SetConsoleTextAttribute(console, wColor);
-	}
+		SetConsoleTextAttribute(console, color);
 }
 
 
