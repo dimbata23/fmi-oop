@@ -3,7 +3,7 @@
 	GameEngine.cpp
 
 	@author Alexander Dimitrov
-	@version 1.4 03/07/18
+	@version 1.41   03/07/18
 */
 
 
@@ -21,7 +21,7 @@
 #include "Explosion.h"
 
 GameEngine* GameEngine::instance = nullptr;
-const wchar_t GameEngine::gameName[] = L"Project \"FMI Invaders\" v1.4";
+const wchar_t GameEngine::gameName[] = L"Project \"FMI Invaders\" v1.41";
 
 const wchar_t* GameEngine::gameLogo[] =
 {
