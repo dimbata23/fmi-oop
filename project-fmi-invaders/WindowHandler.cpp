@@ -234,7 +234,7 @@ void WindowHandler::drawGameWindow() const
 				gameWindow.colors[i][j] != gameWindow.oldColors[i][j])
 			{
 				// Copy the character to the previous screen
-				gameWindow.colors[i][j] = gameWindow.oldColors[i][j];
+				gameWindow.oldColors[i][j] = gameWindow.colors[i][j];
 				gameWindow.oldCharacters[i][j] = gameWindow.characters[i][j];
 
 				// Calculating the console cursor position
@@ -252,10 +252,10 @@ void WindowHandler::drawGameWindow() const
 			}
 		}
 	}
-	setColor(C_WHITE);
+	//setColor(C_WHITE);
 
 	// Setting the cursor out of the gameWindow just incase something happens
-	SetConsoleCursorPosition(console, { gameWindow.x - 1, (short)(gameWindow.y + gameWindow.height + 1) });
+	//SetConsoleCursorPosition(console, { gameWindow.x - 1, (short)(gameWindow.y + gameWindow.height + 1) });
 }
 
 
