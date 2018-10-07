@@ -38,6 +38,7 @@ int main()
 	std::chrono::steady_clock::time_point stop_s;
 	float calcTime;
 
+	// Game loop
 	for (;;) {
 		// Start counting time
 		start_s = std::chrono::steady_clock::now();
@@ -77,6 +78,7 @@ int main()
 	}
 	
 
+	// Before exiting the program, make sure to delete all the memory used
 	WindowHandler::i()->destroySelf();
 	GameEngine::i()->destroySelf();
 
