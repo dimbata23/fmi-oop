@@ -434,6 +434,7 @@ void GameEngine::loadGame()
 
 Object* GameEngine::loadObject(std::ifstream& in) const 
 {
+	Object* result;
 	ObjectType type;
 	// Read the first few bytes of the stream
 	in.read((char*)&type, sizeof(type));

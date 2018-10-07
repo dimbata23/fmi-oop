@@ -69,7 +69,7 @@ public:
 		@param damage the damage inflicted to the object.
 		@return the actual damage taken
 	*/
-	virtual unsigned short receiveDamage(unsigned short damage);
+	virtual unsigned char receiveDamage(unsigned char damage);
 
 	/**
 		Saves the object to a file with the specified stream

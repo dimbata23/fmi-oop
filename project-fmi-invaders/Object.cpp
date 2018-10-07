@@ -60,7 +60,7 @@ Object::Object(std::ifstream& in, ObjectType type, int subType) :
 
 Object::~Object() {}
 void Object::update() {}
-unsigned short Object::receiveDamage(unsigned short damage) { return damage; }
+unsigned char Object::receiveDamage(unsigned char damage) { return damage; }
 
 
 void Object::drawSelf() const 

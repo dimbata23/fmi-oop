@@ -234,7 +234,7 @@ void WindowHandler::drawGameWindow() const
 				gameWindow.colors[i][j] != gameWindow.oldColors[i][j])
 			{
 				// Copy the character to the previous screen
-				gameWindow.colors[i][j] = gameWindow.oldColors[i][j];
+				gameWindow.colors[i][j] == gameWindow.oldColors[i][j];
 				gameWindow.oldCharacters[i][j] = gameWindow.characters[i][j];
 
 				// Calculating the console cursor position
