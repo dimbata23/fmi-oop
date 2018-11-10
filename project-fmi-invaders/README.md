@@ -1,6 +1,6 @@
 # OS Dependent project (Windows only)
 ## *winmm.lib* must be added as additional dependency for PlaySound() command to work
-
+### (See *Project_topic.pdf* for more information)
 ## Tip: For better performance run in Release mode
 
 ![main-menu](https://user-images.githubusercontent.com/15019110/44144930-ca35091a-a089-11e8-9c44-6f824a961f03.png)
