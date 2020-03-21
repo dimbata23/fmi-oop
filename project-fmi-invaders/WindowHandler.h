@@ -152,19 +152,19 @@ private:
     ~WindowHandler();
 
 
-    static WindowHandler* instance;        // The WindowHandler instance
-    HANDLE console;                        // The handle for the console
-    COORD screenSize;                    // Structure containing the width and height of the console (in characters)
-    COORD bufferSize;                    // Structure containing the width and height of the gameWindow (in characters)
+    static WindowHandler* instance;     // The WindowHandler instance
+    HANDLE console;                     // The handle for the console
+    COORD screenSize;                   // Structure containing the width and height of the console (in characters)
+    COORD bufferSize;                   // Structure containing the width and height of the gameWindow (in characters)
     struct {
-        char** characters;                // Matrix with characters for the current frame
-        char** oldCharacters;            // Matrix with characters for the previous frame
-        char** colors;                    // Matrix with colors for the current frame
-        char** oldColors;                // Matrix with colors for the previous frame
+        char** characters;              // Matrix with characters for the current frame
+        char** oldCharacters;           // Matrix with characters for the previous frame
+        char** colors;                  // Matrix with colors for the current frame
+        char** oldColors;               // Matrix with colors for the previous frame
         short x;                        // The x poision of the game window (relative to the console)
         short y;                        // The y poision of the game window (relative to the console)
         short width;                    // Width of the frame {gameWindow} (in characters)
-        short height;                    // Height of the frame {gameWindow} (in characters)
+        short height;                   // Height of the frame {gameWindow} (in characters)
     } gameWindow;
 
     struct {

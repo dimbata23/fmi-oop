@@ -87,15 +87,15 @@ private:
 
 
 protected:
-    const char** model;        // Matrix model of the object
+    const char** model;     // Matrix model of the object
     unsigned id;            // ID
-    const ObjectType type;    // Object's type
-    const int subType;        // Object's subtype
+    const ObjectType type;  // Object's type
+    const int subType;      // Object's subtype
     Color color;            // Color of the object
-    unsigned short x;        // Object's x position
-    unsigned short y;        // Object's y position
-    unsigned short width;    // Object's width
-    unsigned short height;    // Object's height
+    unsigned short x;       // Object's x position
+    unsigned short y;       // Object's y position
+    unsigned short width;   // Object's width
+    unsigned short height;  // Object's height
 };
 
 #endif // !__OBJECT_HEADER_INCLUDED__

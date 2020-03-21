@@ -55,10 +55,10 @@ protected:
     void checkCollisionWithEnemy();
 
     
-    unsigned int score;        // Player's score
-    char lives;                // Player's lives
+    unsigned int score;     // Player's score
+    char lives;             // Player's lives
     char health;            // Player's health points
-    unsigned currFireTick;    // Amount of ticks left until the player can shoot again
+    unsigned currFireTick;  // Amount of ticks left until the player can shoot again
 };
 
 #endif // !__PLAYER_HEADER_INCLUDED__

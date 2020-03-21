@@ -136,15 +136,15 @@ private:
 
 private:
     static GameEngine* instance;    // GameEngine instance
-    Object** gameObjects;            // Array of pointers to the game objects
-    Player* playerObject;            // Pointer to the Player object
-    unsigned numOfObjects;            // The number of game objects
-    unsigned capacity;                // Capacity of the gameObjects array
-    unsigned gameTick;                // Current game tick
-    unsigned short gameSpeed;        // Current game speed
+    Object** gameObjects;           // Array of pointers to the game objects
+    Player* playerObject;           // Pointer to the Player object
+    unsigned numOfObjects;          // The number of game objects
+    unsigned capacity;              // Capacity of the gameObjects array
+    unsigned gameTick;              // Current game tick
+    unsigned short gameSpeed;       // Current game speed
     unsigned char spawnRate;        // Current spawn rate of enemies
-    bool gameOver;                    // The game has ended
-    bool hasSaveFile;                // Save file exists
+    bool gameOver;                  // The game has ended
+    bool hasSaveFile;               // Save file exists
 
     GameEngine();
     ~GameEngine();

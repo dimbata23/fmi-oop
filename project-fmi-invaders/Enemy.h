@@ -31,12 +31,12 @@ public:
     void shoot();
 
 protected:
-    short hp;                            // health points
-    unsigned char fireRate;                // amount of ticks before enemy can shoot again
-    unsigned char horizontalMoveRate;    // horizontal movement speed
-    unsigned char verticalMoveRate;        // vertical movement speed
+    short hp;                           // health points
+    unsigned char fireRate;             // amount of ticks before enemy can shoot again
+    unsigned char horizontalMoveRate;   // horizontal movement speed
+    unsigned char verticalMoveRate;     // vertical movement speed
     unsigned char directionRate;        // amount of ticks before enemy can change direction
-    char direction;                        // either 1 or -1 (1 == right, -1 == left)
+    char direction;                     // either 1 or -1 (1 == right, -1 == left)
     unsigned char value;                // amount of points awarded to the player for destroying the enemy
 };
 
