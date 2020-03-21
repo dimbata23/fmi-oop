@@ -1,9 +1,9 @@
 /**
-	FMI OOP 2018 Final Project
-	EnemyArrow.cpp
+    FMI OOP 2018 Final Project
+    EnemyArrow.cpp
 
-	@author Alexander Dimitrov
-	@version 1.41   03/07/18
+    @author Alexander Dimitrov
+    @version 1.41   03/07/18
 */
 
 
@@ -13,33 +13,33 @@
 const Color DEFAULT_ARROW_COLOR = C_DK_GREEN;
 const char* ARROW_MODEL[] =
 {
-	"    /",
-	"<(-)-",
-	"    \\"
+    "    /",
+    "<(-)-",
+    "    \\"
 };
 
 
 EnemyArrow::EnemyArrow(unsigned short x, unsigned short y) : 
-	Enemy(x, y, ENEMY_ARROW)
+    Enemy(x, y, ENEMY_ARROW)
 { 
-	horizontalMoveRate /= 2;
-	verticalMoveRate *= 10;
-	directionRate /= 2;
-	fireRate /= 3;
-	value *= 5;
-	hp = 1;
-	width = 5;
-	height = 3;
-	model = ARROW_MODEL;
-	color = DEFAULT_ARROW_COLOR;
+    horizontalMoveRate /= 2;
+    verticalMoveRate *= 10;
+    directionRate /= 2;
+    fireRate /= 3;
+    value *= 5;
+    hp = 1;
+    width = 5;
+    height = 3;
+    model = ARROW_MODEL;
+    color = DEFAULT_ARROW_COLOR;
 }
 
 
 EnemyArrow::EnemyArrow(std::ifstream& in) :
-	Enemy(in, ENEMY_ARROW)
+    Enemy(in, ENEMY_ARROW)
 {
-	model = ARROW_MODEL;
-	color = DEFAULT_ARROW_COLOR;
+    model = ARROW_MODEL;
+    color = DEFAULT_ARROW_COLOR;
 }
 
 

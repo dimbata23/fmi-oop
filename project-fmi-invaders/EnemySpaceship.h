@@ -6,9 +6,9 @@
 class EnemySpaceship : public Enemy
 {
 public:
-	EnemySpaceship(unsigned short x, unsigned short y);
-	EnemySpaceship(std::ifstream&);
-	~EnemySpaceship();
+    EnemySpaceship(unsigned short x, unsigned short y);
+    EnemySpaceship(std::ifstream&);
+    ~EnemySpaceship();
 };
 
 #endif // !__ENEMY_SPACESHIP_HEADER_INCLUDED__

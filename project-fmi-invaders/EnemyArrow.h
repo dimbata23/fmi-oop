@@ -6,9 +6,9 @@
 class EnemyArrow : public Enemy
 {
 public:
-	EnemyArrow(unsigned short x, unsigned short y);
-	EnemyArrow(std::ifstream&);
-	~EnemyArrow();
+    EnemyArrow(unsigned short x, unsigned short y);
+    EnemyArrow(std::ifstream&);
+    ~EnemyArrow();
 };
 
 

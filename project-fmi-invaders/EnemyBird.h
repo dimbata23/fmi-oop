@@ -6,9 +6,9 @@
 class EnemyBird : public Enemy
 {
 public:
-	EnemyBird(unsigned short x, unsigned short y);
-	EnemyBird(std::ifstream&);
-	~EnemyBird();
+    EnemyBird(unsigned short x, unsigned short y);
+    EnemyBird(std::ifstream&);
+    ~EnemyBird();
 };
 
 #endif // !__ENEMY_BIRD_HEADER_INCLUDED__
