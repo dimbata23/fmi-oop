@@ -3,13 +3,14 @@
     Main.cpp
 
     @author Alexander Dimitrov
-    @version 1.41   03/07/18
+    @version 1.42   03/21/2020
 */
 
 
 
 #include <iostream>
 #include <chrono>
+#include <cmath>
 #include <windows.h>
 #include <mmsystem.h>
 #include "WindowHandler.h"
@@ -18,7 +19,7 @@
 #include "Player.h"
 
 
-int main() 
+int main()
 {
     // Initiate and setup the Console window
     WindowHandler::i()->initWindow();
@@ -74,7 +75,7 @@ int main()
         
         // Pause the application for exactly 1000 / (gameSpeed - calcTime) milisec.
         // i.e. it has an effect of a constant frame rate (unless calcTime exceeds the gameSpeed)
-        Sleep(max(1000.0 / GameEngine::i()->getGameSpeed() - calcTime, 0));
+        Sleep(std::max(1000.0 / GameEngine::i()->getGameSpeed() - calcTime, 0.0));
     }
     
 

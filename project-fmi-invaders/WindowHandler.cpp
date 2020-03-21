@@ -3,34 +3,35 @@
     WindowsHandler.cpp
 
     @author Alexander Dimitrov
-    @version 1.41   03/07/18
+    @version 1.42   03/07/18
 */
 
 
 
 #include <iostream>
+#include <cmath>
 #include <io.h>
 #include <fcntl.h>
 #include "WindowHandler.h"
 #include "GameEngine.h"
+ 
+const short     MIN_WIDTH              = 58;
+const short     MIN_HEIGHT             = 30;
+const short     MAX_WIDTH              = 90;
+const short     MAX_HEIGHT             = 40;
+const short     MIN_GAME_WINDOW_X      = 1;
+const short     MIN_GAME_WINDOW_Y      = 2;
+const short     PAUSE_MENU_WIDTH       = 20;
+const short     PAUSE_MENU_HEIGHT      = 9;
+const wchar_t   BORDER_CHAR            = L'█';
+const wchar_t   HEART                  = L'♥';
+const wchar_t   HEALTH[]               = L"█░▒▓";
+const wchar_t   PAUSE_MENU_SELECTOR    = L'►';
 
-const unsigned char        MIN_WIDTH            = 58;
-const unsigned char        MIN_HEIGHT            = 30;
-const unsigned char        MAX_WIDTH            = 90;
-const unsigned char        MAX_HEIGHT            = 40;
-const unsigned char        MIN_GAME_WINDOW_X    = 1;
-const unsigned char        MIN_GAME_WINDOW_Y    = 2;
-const unsigned char        PAUSE_MENU_WIDTH    = 20;
-const unsigned char        PAUSE_MENU_HEIGHT    = 9;
-const wchar_t            BORDER_CHAR            = L'█';
-const wchar_t            HEART                = L'♥';
-const wchar_t            HEALTH[]            = L"█░▒▓";
-const wchar_t            PAUSE_MENU_SELECTOR = L'►';
+const short     TOP_GUI_OFFSET         = 2;
+const short     BOTTOM_GUI_OFFSET      = 1;
 
-const unsigned char        TOP_GUI_OFFSET        = 2;
-const unsigned char        BOTTOM_GUI_OFFSET    = 1;
-
-const wchar_t*            GAME_OVER_TEXT[]    =
+const wchar_t*  GAME_OVER_TEXT[]       =
 {
     L" _____   ___  ___  ___ _____   _____  _   _  _____ ______ ",
     L"|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | ||  ___|| ___ \\",
@@ -39,8 +40,8 @@ const wchar_t*            GAME_OVER_TEXT[]    =
     L"| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ /| |___ | |\\ \\ ",
     L"\\_____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/ \\____/ \\_| \\_|"
 };
-const unsigned char        GAME_OVER_TEXT_LEN    = 58;
-const unsigned char        GAME_OVER_TEXT_HEIGHT = 6;
+const short     GAME_OVER_TEXT_LEN     = 58;
+const short     GAME_OVER_TEXT_HEIGHT  = 6;
 
 WindowHandler* WindowHandler::instance = nullptr;
 
@@ -76,7 +77,7 @@ WindowHandler* WindowHandler::i()
 void WindowHandler::initWindow() 
 {
     // Setting the font
-    setFont(L"Consolas", 16, 16, FW_BOLD);
+    //setFont(L"Consolas", 16, 16, FW_BOLD);
 
     // Setting to fullscreen
     console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -107,8 +108,8 @@ void WindowHandler::initWindow()
     bufferSize.Y -= 10;    //    of the console buffer and cause scrollbars
     
     // Clamping to min/max size
-    bufferSize.X = max(MIN_WIDTH, min(bufferSize.X, MAX_WIDTH));
-    bufferSize.Y = max(MIN_HEIGHT, min(bufferSize.Y, MAX_HEIGHT));
+    bufferSize.X = std::max(MIN_WIDTH, std::min(bufferSize.X, MAX_WIDTH));
+    bufferSize.Y = std::max(MIN_HEIGHT, std::min(bufferSize.Y, MAX_HEIGHT));
 
     // Hide the cursor
     showCursor(false);
@@ -448,8 +449,8 @@ void WindowHandler::addTextToWindow(const char* str, unsigned char xPosInWindow,
 void WindowHandler::setupGameWindow() 
 {
     // Calculating the game gameWindow coords
-    short temp_window_x = ceil(max(MIN_GAME_WINDOW_X, (screenSize.X - bufferSize.X - 2) / 2)) + 1;
-    short temp_window_y = ceil(max(MIN_GAME_WINDOW_Y, (screenSize.Y - bufferSize.Y - 2) / 2)) + 1;
+    short temp_window_x = std::ceil(std::max(MIN_GAME_WINDOW_X, (short)((screenSize.X - bufferSize.X - 2) / 2))) + 1;
+    short temp_window_y = std::ceil(std::max(MIN_GAME_WINDOW_Y, (short)((screenSize.Y - bufferSize.Y - 2) / 2))) + 1;
 
     // Setting up the game gameWindow struct
     gameWindow = { nullptr, nullptr, nullptr, nullptr, temp_window_x, temp_window_y, bufferSize.X, bufferSize.Y };
@@ -528,7 +529,7 @@ void WindowHandler::drawGameWindowBorder() const
     SetConsoleCursorPosition(console, { gameWindow.x, gameWindow.y - 1 });
     for (short i = 0; i <= gameWindow.width; ++i)
         std::wcout << BORDER_CHAR;
-    for (short i = max(0, gameWindow.y - 1); i < gameWindow.y + gameWindow.height + 1; i++) {
+    for (short i = std::max(0, gameWindow.y - 1); i < gameWindow.y + gameWindow.height + 1; i++) {
         SetConsoleCursorPosition(console, { gameWindow.x - 1, i });
         std::wcout << BORDER_CHAR;
         SetConsoleCursorPosition(console, { (short)(gameWindow.x + gameWindow.width), i });
