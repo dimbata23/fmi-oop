@@ -6,13 +6,10 @@
 class PostText : public Post
 {
 public:
-	PostText(const char* content);
-	virtual ~PostText();
-	virtual void writeInHTMLFile(std::ofstream& file, const char* poster) const;
-	virtual Post* clone() const;
-protected:
-	virtual void copyData(const PostText&);
-	virtual void deleteData();
+    PostText(const char* content);
+    virtual ~PostText() = default;
+    virtual void writeInHTMLFile(std::ofstream& file, const char* poster) const override;
+    virtual Post* clone() const override;
 };
 
 #endif // !__POST_IMAGE_INCLUDED__

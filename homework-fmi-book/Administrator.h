@@ -6,13 +6,13 @@
 class Administrator : public Moderator
 {
 public:
-	Administrator(const char* nickname, short age);
-	~Administrator();
-public:
-	virtual bool isAdmin() const;
-	virtual bool isModerator() const;
-	virtual User* clone() const;
-};
+    Administrator(const char* nickname, short age);
+    virtual ~Administrator() = default;
 
+public:
+    virtual bool isAdmin() const override;
+    virtual bool isModerator() const override;
+    virtual User* clone() const override;
+};
 
 #endif // !__ADMINISTRATOR_INCLUDED__

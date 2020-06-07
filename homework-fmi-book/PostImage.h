@@ -6,13 +6,10 @@
 class PostImage : public Post
 {
 public:
-	PostImage(const char* imageURL);
-	virtual ~PostImage();
-	virtual void writeInHTMLFile(std::ofstream& file, const char* poster) const;
-	virtual Post* clone() const;
-protected:
-	virtual void copyData(const PostImage&);
-	virtual void deleteData();
+    PostImage(const char* imageURL);
+    virtual ~PostImage() = default;
+    virtual void writeInHTMLFile(std::ofstream& file, const char* poster) const override;
+    virtual Post* clone() const override;
 };
 
 #endif // !__POST_IMAGE_INCLUDED__

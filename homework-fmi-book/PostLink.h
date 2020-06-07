@@ -6,16 +6,18 @@
 class PostLink : public Post
 {
 public:
-	PostLink(const char* content, const char* url);
-	PostLink(const PostLink&);
-	virtual ~PostLink();
-	virtual void writeInHTMLFile(std::ofstream& file, const char* poster) const;
-	virtual Post* clone() const;
+    PostLink(const char* content, const char* url);
+    PostLink(const PostLink&);
+    virtual ~PostLink();
+    virtual void writeInHTMLFile(std::ofstream& file, const char* poster) const override;
+    virtual Post* clone() const override;
+
 protected:
-	virtual void copyData(const PostLink&);
-	virtual void deleteData();
-protected:
-	char* url;
+    char* url;
+
+private:
+    void copyData(const PostLink&);
+    void deleteData();
 };
 
 #endif // !__POST_IMAGE_INCLUDED__
